@@ -16,6 +16,8 @@ and about our project structure [here](https://medium.com/trabe/monorepo-setup-w
 
 ### frontend
 - This directory contains our core frontend react service
+- to use: `yarn install` then `yarn start`
 
 ### backend
 - This directory contains our graphql api service
+- to use: `yarn install`, `yarn prismadeploy`, then `yarn start`
