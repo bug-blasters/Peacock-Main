@@ -15,13 +15,15 @@
     "react-router-dom": "5.0.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "typescript": "3.3.3",
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "start": "./task react-scripts start",
     "build": "./task react-scripts build",
     "test": "./task react-scripts test --env=jsdom",
-    "eject": "./task react-scripts eject"
+    "eject": "./task react-scripts eject",
+    "webpack": "./task webpack"
   },
   "browserslist": [
     ">0.2%",
