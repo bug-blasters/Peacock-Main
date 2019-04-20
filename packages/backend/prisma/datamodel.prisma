@@ -1,22 +1,28 @@
-type Portfolio {
-  id: ID! @unique
+type Project {
+  id: ID! @unique @id
   title: String!
   description: String!
   ownedBy: User!
   favorites: [Favorite!]!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
 
 type User {
-  id: ID! @unique
+  id: ID! @unique @id
   name: String!
   email: String! @unique
   password: String!
-  portfolios: [Portfolio!]!
+  projects: [Project!]!
   favorites: [Favorite!]!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
 
 type Favorite {
-  id: ID! @unique
-  portfolio: Portfolio!
+  id: ID! @unique @id
+  project: Project!
   user: User!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }

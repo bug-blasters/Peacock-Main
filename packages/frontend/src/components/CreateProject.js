@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { AUTH_TOKEN } from '../constants'
-import { FEED_QUERY } from './ActivityFeed'
+import { FEED_QUERY } from './ProjectList'
 
 const POST_MUTATION = gql`
   mutation PostMutation($title: String!, $description: String!) {
-    createPortfolio(title: $title, description: $description) {
+    createProject(title: $title, description: $description) {
       id
       title
       description
@@ -21,10 +21,6 @@ class CreateProject extends Component {
   }
 
   render() {
-    // localStorage.setItem(
-    //   AUTH_TOKEN,
-    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanU5ZG1saWo1YWoyMGIyNnNsZnFoeTM0IiwiaWF0IjoxNTU0NzkwNTYxfQ.HGNChJ4Yu3EMZPA69XZoJmtaCBZLiKKPgrcT3VrhS0A'
-    // )
     const { description, title } = this.state
     return (
       <div>
@@ -50,7 +46,7 @@ class CreateProject extends Component {
           variables={{ description, title }}
           update={(store, { data: { post } }) => {
             const data = store.readQuery({ query: FEED_QUERY })
-            data.feed.portfolios.unshift(post)
+            data.feed.projects.unshift(post)
             store.writeQuery({
               query: FEED_QUERY,
               data

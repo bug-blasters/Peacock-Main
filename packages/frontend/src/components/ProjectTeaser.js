@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-import AUTH_TOKEN from '../constants';
+import { AUTH_TOKEN } from '../constants';
 import '../styles/ProjectTeaser.css';
 
 const FAVORITE_MUTATION = gql`
-  mutation favorite($portfolioId: ID!) {
-    favorite(portfolioId: $portfolioId) {
+  mutation favorite($projectId: ID!) {
+    favorite(projectId: $projectId) {
       id
-      portfolio {
+      project {
         favorites {
           id
           user {
@@ -41,7 +41,7 @@ const ProjectTeaser = ({ project, updateStoreAfterFavorite, favorites }) => {
         {authToken && (
           <Mutation
             mutation={FAVORITE_MUTATION}
-            variables={{ portfolioId: project.id }}
+            variables={{ projectId: project.id }}
             update={(store, { data: { favorite } }) =>
               updateStoreAfterFavorite(store, favorite, project.id)
             }
