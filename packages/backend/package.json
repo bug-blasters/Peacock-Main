@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "./task nodemon src/index.js localhost 8080",
-    "prismadeploy": "cd prisma && ./task prisma deploy",
-    "prismainit": "cd prisma && ./task prisma init"
+    "prismadeploy": "cd prisma && prisma deploy",
+    "prismainit": "cd prisma && prisma init"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
