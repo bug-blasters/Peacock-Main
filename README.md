@@ -14,10 +14,8 @@ and about our project structure [here](https://medium.com/trabe/monorepo-setup-w
 - When creating a new service using babel, eslint, etc. import these config files to the top of the corresponding service level config.
 - The `task` script allows other packages to execute commands from dependencies installed within this package
 
-
-## Services
 ### frontend
-- This directory contains our core frontend react code
+- This directory contains our core frontend react service
 
 ### backend
-- This directory contains our graphql server
+- This directory contains our graphql api service
