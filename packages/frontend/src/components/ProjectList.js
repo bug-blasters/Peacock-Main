@@ -10,7 +10,6 @@ const ProjectList = ({ children }) => (
       if (error) return <div>Error</div>;
 
       const projects = data.feed.projects;
-      console.log(projects);
       return projects.map(project => (
         <ProjectTeaser
           project={project}

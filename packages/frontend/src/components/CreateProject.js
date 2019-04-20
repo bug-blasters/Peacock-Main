@@ -44,9 +44,9 @@ class CreateProject extends Component {
           mutation={POST_MUTATION}
           onCompleted={() => this.props.history.push('/')}
           variables={{ description, title }}
-          update={(store, { data: { post } }) => {
+          update={(store, { data: { project } }) => {
             const data = store.readQuery({ query: FEED_QUERY })
-            data.feed.projects.unshift(post)
+            data.feed.projects.unshift(project)
             store.writeQuery({
               query: FEED_QUERY,
               data
