@@ -5,8 +5,8 @@ An application for documenting and sharing projects and hobbies
 - top level package.json and lerna.json exist for monorepo management
 - publish bash script is for publishing changes to npm 
 
-Read about yarn and lerna [here|https://medium.com/naresh-bhatia/sharing-ui-components-with-lerna-and-yarn-workspaces-be1ebca06efe] 
-and about our project structure [here|https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91]
+Read about yarn and lerna [here](https://medium.com/naresh-bhatia/sharing-ui-components-with-lerna-and-yarn-workspaces-be1ebca06efe) 
+and about our project structure [here](https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91)
 
 ## packages/
 ### common-tooling
