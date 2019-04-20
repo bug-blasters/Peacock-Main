@@ -1,6 +1,6 @@
 function newProjectSubscribe(parent, args, context, info) {
   return context.prisma.$subscribe
-    .portfolio({ mutation_in: ['CREATED'] })
+    .project({ mutation_in: ['CREATED'] })
     .node();
 }
 

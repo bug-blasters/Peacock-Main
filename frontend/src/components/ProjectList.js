@@ -9,8 +9,8 @@ const ProjectList = ({ children }) => (
       if (loading) return <div>Fetching</div>;
       if (error) return <div>Error</div>;
 
-      const projects = data.feed.portfolios;
-
+      const projects = data.feed.projects;
+      console.log(projects);
       return projects.map(project => (
         <ProjectTeaser
           project={project}
@@ -22,22 +22,22 @@ const ProjectList = ({ children }) => (
   </Query>
 );
 
-const _updateCacheAfterFavorite = (store, createFavorite, portfolioId) => {
+const _updateCacheAfterFavorite = (store, createFavorite, projectId) => {
   const data = store.readQuery({ query: FEED_QUERY });
 
-  const favoritedPortfolio = data.feed.portfolios.find(
-    portfolio => portfolio.id === portfolioId
+  const favoritedProject = data.feed.projects.find(
+    project => project.id === projectId
   );
-  favoritedPortfolio.favorites = createFavorite.portfolio.favorites;
+  favoritedProject.favorites = createFavorite.project.favorites;
 
   store.writeQuery({ query: FEED_QUERY, data });
 };
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   {
     feed {
       count
-      portfolios {
+      projects {
         id
         title
         description

@@ -13,7 +13,7 @@ import { AUTH_TOKEN } from './constants';
 import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
-  uri: 'https://q8q0w4x5mw.sse.codesandbox.io/'
+  uri: 'http://localhost:4000'
 });
 
 const authLink = setContext((_, { headers }) => {
