@@ -1,12 +1,12 @@
 {
-  "name": "peacock",
+  "name": "peacock-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Peacock Backend",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js localhost 8080",
-    "prismadeploy": "cd prisma && prisma deploy",
-    "prismainit": "cd prisma && prisma init"
+    "start": "./task nodemon src/index.js localhost 8080",
+    "prismadeploy": "cd prisma && ./task prisma deploy",
+    "prismainit": "cd prisma && ./task prisma init"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
@@ -15,9 +15,6 @@
     "jsonwebtoken": "8.5.1",
     "prisma": "1.30.0",
     "prisma-client-lib": "1.30.0"
-  },
-  "devDependencies": {
-    "nodemon": "1.18.4"
   },
   "keywords": []
 }
