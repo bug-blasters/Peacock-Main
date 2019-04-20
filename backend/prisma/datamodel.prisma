@@ -1,0 +1,22 @@
+type Portfolio {
+  id: ID! @unique
+  title: String!
+  description: String!
+  ownedBy: User!
+  favorites: [Favorite!]!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  portfolios: [Portfolio!]!
+  favorites: [Favorite!]!
+}
+
+type Favorite {
+  id: ID! @unique
+  portfolio: Portfolio!
+  user: User!
+}

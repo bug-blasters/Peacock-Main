@@ -1,0 +1,36 @@
+.activity-feed {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.project-teaser {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  background-color: blue;
+  margin: 30px;
+  width: 300px;
+}
+
+.teaser-info-text > * {
+  background-color: cyan;
+  margin-bottom: 5px;
+}
+
+.teaser-cover-photo {
+  height: 150px;
+
+  background-color: grey;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.teaser-more-photo {
+  display: flex;
+  justify-content: space-around;
+
+  background-color: grey;
+  margin-bottom: 10px;
+  padding: 20px;
+}

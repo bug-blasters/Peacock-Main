@@ -1,0 +1,23 @@
+{
+  "name": "peacock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js localhost 8080",
+    "prismadeploy": "cd prisma && prisma deploy",
+    "prismainit": "cd prisma && prisma init"
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "graphql-import": "0.7.1",
+    "graphql-yoga": "1.17.4",
+    "jsonwebtoken": "8.5.1",
+    "prisma": "1.30.0",
+    "prisma-client-lib": "1.30.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  },
+  "keywords": []
+}

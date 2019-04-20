@@ -1,0 +1,61 @@
+type Query {
+  info: String!
+  feed(filter: String, skip: Int, first: Int, orderBy: ProjectOrderByInput): Feed!
+  users: [User!]!
+  projects: [Project!]!
+}
+
+type Mutation {
+  createProject(title: String!, description: String!): Project!
+  deleteProject(id: ID!): Project
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  favorite(projectId: ID!): Favorite
+}
+
+type Project {
+  id: ID!
+  title: String!
+  description: String!
+  ownedBy: User!
+  favorites: [Favorite!]!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  projects: [Project!]!
+  favorites: [Favorite!]!
+}
+
+type Subscription {
+  newProject: Project
+  newFavorite: Favorite
+}
+
+type Favorite {
+  id: ID!
+  project: Project!
+  user: User!
+}
+
+type Feed {
+  projects: [Project!]!
+  count: Int!
+}
+
+enum ProjectOrderByInput {
+  description_ASC
+  description_DESC
+  title_ASC
+  title_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
