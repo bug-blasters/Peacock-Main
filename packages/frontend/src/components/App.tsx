@@ -1,4 +1,3 @@
-// import React, { FunctionComponent } from 'react'; // importing FunctionComponent
 import * as React from 'react';
 import '../styles/App.css';
 import ActivityFeed from './ActivityFeed';
@@ -7,7 +6,7 @@ import LoginForm from './LoginForm';
 import Header from './Header';
 import { Switch, Route } from 'react-router-dom';
 
-export const App = () => 
+const App: React.FunctionComponent = () =>
     <div>
       <Header />
       <div>
