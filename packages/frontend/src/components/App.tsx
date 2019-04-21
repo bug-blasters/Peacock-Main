@@ -1,4 +1,5 @@
-import React from 'react';
+// import React, { FunctionComponent } from 'react'; // importing FunctionComponent
+import * as React from 'react';
 import '../styles/App.css';
 import ActivityFeed from './ActivityFeed';
 import CreateProject from './CreateProject';
@@ -6,8 +7,7 @@ import LoginForm from './LoginForm';
 import Header from './Header';
 import { Switch, Route } from 'react-router-dom';
 
-export default function App() {
-  return (
+export const App = () => 
     <div>
       <Header />
       <div>
@@ -18,5 +18,5 @@ export default function App() {
         </Switch>
       </div>
     </div>
-  );
-}
+
+export default App

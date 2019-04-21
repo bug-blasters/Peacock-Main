@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from 'react-dom';
 import App from './components/App';
 import './styles/index.css';
 import { ApolloProvider } from 'react-apollo';
@@ -11,7 +11,7 @@ import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
 import { AUTH_TOKEN } from './constants';
 import { BrowserRouter } from 'react-router-dom';
-
+// import {BrowserRouter as Router} from 'react-router-dom';
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000'
 });
