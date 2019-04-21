@@ -21,3 +21,6 @@ and about our project structure [here](https://medium.com/trabe/monorepo-setup-w
 ### backend
 - This directory contains our graphql api service
 - to use: `yarn install`, `yarn prismadeploy`, then `yarn start`
+
+### links
+- Engine / schema: https://engine.apollographql.com/service/blasters/explorer?schemaTag=current 
