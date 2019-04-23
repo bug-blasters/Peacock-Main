@@ -1,14 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import ProjectTeaser from './ProjectTeaser';
+import { Project, ProjectListComponent, Favorite } from '../generated/graphql'
 
-const ProjectList = ({ children }) => (
-  <Query query={FEED_QUERY}>
-    {({ loading, error, data }) => {
-      if (loading) return <div>Fetching</div>;
-      if (error) return <div>Error</div>;
+const ProjectList: React.FunctionComponent = () => (
+  <ProjectListComponent>
+  {({ loading, error, data }) => {
+    if (loading) return <div>Fetching</div>;
+    if (error) return <div>Error</div>;
 
+    if (data && data.feed.projects) {
       const projects = data.feed.projects;
       return projects.map(project => (
         <ProjectTeaser
@@ -17,15 +18,16 @@ const ProjectList = ({ children }) => (
           favorites={project.favorites}
         />
       ));
-    }}
-  </Query>
+    }
+  }}
+  </ProjectListComponent>
 );
 
-const _updateCacheAfterFavorite = (store, createFavorite, projectId) => {
+const _updateCacheAfterFavorite = (store: any, createFavorite: Favorite, projectId: Project["id"]) => {
   const data = store.readQuery({ query: FEED_QUERY });
 
   const favoritedProject = data.feed.projects.find(
-    project => project.id === projectId
+    (project: Project) => project.id === projectId
   );
   favoritedProject.favorites = createFavorite.project.favorites;
 
@@ -33,7 +35,7 @@ const _updateCacheAfterFavorite = (store, createFavorite, projectId) => {
 };
 
 export const FEED_QUERY = gql`
-  {
+  query ProjectList {
     feed {
       count
       projects {
