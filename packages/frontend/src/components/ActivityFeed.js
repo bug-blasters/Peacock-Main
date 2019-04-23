@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectList from './ProjectList';
+import "../styles/ProjectTeaser.css"
 
 const ActivityFeed = () => {
   return (
