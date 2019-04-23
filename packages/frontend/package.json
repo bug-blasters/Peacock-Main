@@ -16,16 +16,13 @@
     "react-router": "5.0.0",
     "react-router-dom": "^5.0.0"
   },
-  "devDependencies": {
-    "typescript": "3.3.3",
-    "webpack-cli": "^3.3.0"
-  },
   "scripts": {
     "start": "./task react-scripts start",
     "build": "./task react-scripts build",
     "test": "./task react-scripts test --env=jsdom",
     "eject": "./task react-scripts eject",
-    "webpack": "./task webpack"
+    "webpack": "./task webpack",
+    "codegen": "./task graphql-codegen --config codegen.yml"
   },
   "browserslist": [
     ">0.2%",
