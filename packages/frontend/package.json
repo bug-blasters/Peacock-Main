@@ -17,8 +17,10 @@
     "react-router-dom": "^5.0.0"
   },
   "scripts": {
-    "start": "./task react-scripts start",
-    "build": "./task react-scripts build",
+    "start-deprecated": "./task react-scripts start",
+    "build-deprecated": "./task react-scripts build",
+    "start": "webpack-dev-server --open --hot --mode development",
+    "build": "webpack --mode production",
     "test": "./task react-scripts test --env=jsdom",
     "eject": "./task react-scripts eject",
     "webpack": "./task webpack",
