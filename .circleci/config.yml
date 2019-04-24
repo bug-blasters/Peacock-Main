@@ -1,13 +1,9 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
 
-orbs: 
-  hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
+orbs:
+    hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
 
 workflows:
-  "Hello Workflow":
-    jobs:
-      - hello/hello-build
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
