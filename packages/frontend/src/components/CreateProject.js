@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
-import { AUTH_TOKEN } from '../constants'
 import { FEED_QUERY } from './ProjectList'
 
 const POST_MUTATION = gql`

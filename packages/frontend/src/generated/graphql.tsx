@@ -100,6 +100,25 @@ export type User = {
   projects: Array<Project>;
   favorites: Array<Favorite>;
 };
+export type SignupGqlMutationVariables = {
+  email: Scalars["String"];
+  password: Scalars["String"];
+  name: Scalars["String"];
+};
+
+export type SignupGqlMutation = { __typename?: "Mutation" } & {
+  signup: Maybe<{ __typename?: "AuthPayload" } & Pick<AuthPayload, "token">>;
+};
+
+export type LoginGqlMutationVariables = {
+  email: Scalars["String"];
+  password: Scalars["String"];
+};
+
+export type LoginGqlMutation = { __typename?: "Mutation" } & {
+  login: Maybe<{ __typename?: "AuthPayload" } & Pick<AuthPayload, "token">>;
+};
+
 export type ProjectListQueryVariables = {};
 
 export type ProjectListQuery = { __typename?: "Query" } & {
@@ -122,6 +141,98 @@ import * as React from "react";
 import * as ReactApollo from "react-apollo";
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
+export const SignupGqlDocument = gql`
+  mutation SignupGql($email: String!, $password: String!, $name: String!) {
+    signup(email: $email, password: $password, name: $name) {
+      token
+    }
+  }
+`;
+
+export const SignupGqlComponent = (
+  props: Omit<
+    Omit<
+      ReactApollo.MutationProps<SignupGqlMutation, SignupGqlMutationVariables>,
+      "mutation"
+    >,
+    "variables"
+  > & { variables: SignupGqlMutationVariables }
+) => (
+  <ReactApollo.Mutation<SignupGqlMutation, SignupGqlMutationVariables>
+    mutation={SignupGqlDocument}
+    {...props}
+  />
+);
+
+export type SignupGqlProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<SignupGqlMutation, SignupGqlMutationVariables>
+> &
+  TChildProps;
+export type SignupGqlMutationFn = ReactApollo.MutationFn<
+  SignupGqlMutation,
+  SignupGqlMutationVariables
+>;
+export function withSignupGql<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    SignupGqlMutation,
+    SignupGqlMutationVariables,
+    SignupGqlProps<TChildProps>
+  >
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    SignupGqlMutation,
+    SignupGqlMutationVariables,
+    SignupGqlProps<TChildProps>
+  >(SignupGqlDocument, operationOptions);
+}
+export const LoginGqlDocument = gql`
+  mutation LoginGql($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+export const LoginGqlComponent = (
+  props: Omit<
+    Omit<
+      ReactApollo.MutationProps<LoginGqlMutation, LoginGqlMutationVariables>,
+      "mutation"
+    >,
+    "variables"
+  > & { variables: LoginGqlMutationVariables }
+) => (
+  <ReactApollo.Mutation<LoginGqlMutation, LoginGqlMutationVariables>
+    mutation={LoginGqlDocument}
+    {...props}
+  />
+);
+
+export type LoginGqlProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<LoginGqlMutation, LoginGqlMutationVariables>
+> &
+  TChildProps;
+export type LoginGqlMutationFn = ReactApollo.MutationFn<
+  LoginGqlMutation,
+  LoginGqlMutationVariables
+>;
+export function withLoginGql<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    LoginGqlMutation,
+    LoginGqlMutationVariables,
+    LoginGqlProps<TChildProps>
+  >
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    LoginGqlMutation,
+    LoginGqlMutationVariables,
+    LoginGqlProps<TChildProps>
+  >(LoginGqlDocument, operationOptions);
+}
 export const ProjectListDocument = gql`
   query ProjectList {
     feed {
