@@ -6,6 +6,6 @@
   ],
   "rules": {
     "prettier": true,
-    "quotemark": [true, "single"]
+    "quotemark": [true, "single", "jsx-double"]
   }
 }
