@@ -19,6 +19,7 @@
   "scripts": {
     "start": "./task react-scripts start",
     "build": "./task react-scripts build",
+    "lint": "./task tslint --fix --project tsconfig.json --config tslint.json --exclude src/generated/**",
     "test": "./task react-scripts test --env=jsdom",
     "eject": "./task react-scripts eject",
     "codegen": "./task graphql-codegen --config codegen.yml"

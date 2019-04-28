@@ -47,8 +47,8 @@ class CreateProject extends Component {
             const data = store.readQuery({ query: FEED_QUERY });
             data.feed.projects.unshift(project);
             store.writeQuery({
-              query: FEED_QUERY,
               data,
+              query: FEED_QUERY,
             });
           }}
         >
