@@ -30,7 +30,7 @@ const FeaturedProject = ({ imageUrl }: FeaturedProjectProps) => (
 );
 
 interface OtherProjectsProps {
-  projects: [Project];
+  projects: Array<{ imageUrl: string }>;
 }
 
 const OtherProjects = ({ projects }: OtherProjectsProps) => (
