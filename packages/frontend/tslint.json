@@ -1,8 +1,11 @@
 {
   "extends": [
-      "tslint:recommended"
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-plugin-prettier"
   ],
   "rules": {
-      "quotemark": [true, "single"]
+    "prettier": true,
+    "quotemark": [true, "single"]
   }
 }
