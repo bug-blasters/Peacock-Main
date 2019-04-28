@@ -1,29 +1,37 @@
-import * as React from 'react';
 import gql from 'graphql-tag';
+import * as React from 'react';
+import { Favorite, Project, ProjectListComponent } from '../generated/graphql';
 import ProjectTeaser from './ProjectTeaser';
-import { Project, ProjectListComponent, Favorite } from '../generated/graphql'
 
 const ProjectList: React.FunctionComponent = () => (
   <ProjectListComponent>
-  {({ loading, error, data }) => {
-    if (loading) return <div>Fetching</div>;
-    if (error) return <div>Error</div>;
+    {({ loading, error, data }) => {
+      if (loading) {
+        return <div>Fetching</div>;
+      }
+      if (error) {
+        return <div>Error</div>;
+      }
 
-    if (data && data.feed.projects) {
-      const projects = data.feed.projects;
-      return projects.map(project => (
-        <ProjectTeaser
-          project={project}
-          updateStoreAfterFavorite={_updateCacheAfterFavorite}
-          favorites={project.favorites}
-        />
-      ));
-    }
-  }}
+      if (data && data.feed.projects) {
+        const projects = data.feed.projects;
+        return projects.map(project => (
+          <ProjectTeaser
+            project={project}
+            updateStoreAfterFavorite={updateCacheAfterFavorite}
+            favorites={project.favorites}
+          />
+        ));
+      }
+    }}
   </ProjectListComponent>
 );
 
-const _updateCacheAfterFavorite = (store: any, createFavorite: Favorite, projectId: Project["id"]) => {
+const updateCacheAfterFavorite = (
+  store: any,
+  createFavorite: Favorite,
+  projectId: Project['id']
+) => {
   const data = store.readQuery({ query: FEED_QUERY });
 
   const favoritedProject = data.feed.projects.find(
