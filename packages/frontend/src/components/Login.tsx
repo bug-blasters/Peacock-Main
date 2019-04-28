@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import React from 'react';
 import { AUTH_TOKEN } from '../constants';
 import {
   LoginGqlComponent,

@@ -1,6 +1,11 @@
 type Query {
   info: String!
-  feed(filter: String, skip: Int, first: Int, orderBy: ProjectOrderByInput): Feed!
+  feed(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: ProjectOrderByInput
+  ): Feed!
   users: [User!]!
   projects: [Project!]!
 }
