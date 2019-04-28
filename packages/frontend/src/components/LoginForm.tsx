@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PureComponent, useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 
@@ -8,57 +9,56 @@ export interface ILoginState {
   password: string;
   name: string;
 }
-class LoginSignupForm extends React.PureComponent<{}, ILoginState> {
-  state: State = {
-    login: true, // switch between Login and SignUp
+const LoginSignupForm: PureComponent<{}, ILoginState> = () => {
+  const [state, setState] = useState({
     email: '',
-    password: '',
+    login: true, // switch between Login and SignUp
     name: '',
-  };
+    password: '',
+  });
 
-  render() {
-    const { login, email, password, name } = this.state;
-    return (
-      <div>
-        <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
-        <div className="flex flex-column">
-          {!login && (
-            <input
-              value={name}
-              onChange={e => this.setState({ name: e.target.value })}
-              type="text"
-              placeholder="Your name"
-            />
-          )}
+  const { login, email, password, name } = state;
+
+  return (
+    <div>
+      <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
+      <div className="flex flex-column">
+        {!login && (
           <input
-            value={email}
-            onChange={e => this.setState({ email: e.target.value })}
+            value={name}
+            onChange={e => setState({ ...state, name: e.target.value })}
             type="text"
-            placeholder="Your email address"
+            placeholder="Your name"
           />
-          <input
-            value={password}
-            onChange={e => this.setState({ password: e.target.value })}
-            type="password"
-            placeholder="Choose a safe password"
-          />
-        </div>
-        <div className="flex mt3">
-          {login ? (
-            <Login variables={{ email, password }} />
-          ) : (
-            <Signup variables={{ email, password, name }} />
-          )}
-          <div
-            className="pointer button"
-            onClick={() => this.setState({ login: !login })}
-          >
-            {login ? 'need to create an account?' : 'already have an account?'}
-          </div>
+        )}
+        <input
+          value={email}
+          onChange={e => setState({ ...state, email: e.target.value })}
+          type="text"
+          placeholder="Your email address"
+        />
+        <input
+          value={password}
+          onChange={e => setState({ ...state, password: e.target.value })}
+          type="password"
+          placeholder="Choose a safe password"
+        />
+      </div>
+      <div className="flex mt3">
+        {login ? (
+          <Login variables={{ email, password }} />
+        ) : (
+          <Signup variables={{ email, password, name }} />
+        )}
+        <div
+          className="pointer button"
+          onClick={() => setState({ ...state, login: !login })}
+        >
+          {login ? 'need to create an account?' : 'already have an account?'}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default LoginSignupForm;
