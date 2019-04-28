@@ -1,18 +1,11 @@
-import * as React from 'react';
-import { PureComponent, useState } from 'react';
+import { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 
-export interface ILoginState {
-  login: boolean;
-  email: string;
-  password: string;
-  name: string;
-}
-const LoginSignupForm: PureComponent<{}, ILoginState> = () => {
+const LoginSignupForm = () => {
   const [state, setState] = useState({
     email: '',
-    login: true, // switch between Login and SignUp
+    login: true,
     name: '',
     password: '',
   });

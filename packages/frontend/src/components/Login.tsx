@@ -7,11 +7,11 @@ import {
   LoginGqlMutationVariables,
 } from '../generated/graphql';
 
-interface ILoginProps {
+interface LoginProps {
   variables: LoginGqlMutationVariables;
 }
 
-const Login: React.FunctionComponent<ILoginProps> = ({ variables }) => (
+const Login = ({ variables }: LoginProps) => (
   <LoginGqlComponent variables={variables} onCompleted={saveUserData}>
     {(mutation: LoginGqlMutationFn) => (
       <div className="pointer mr2 button" onClick={() => mutation()}>

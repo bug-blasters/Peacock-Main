@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import gql from 'graphql-tag';
+import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { FEED_QUERY } from './ProjectList';
 
