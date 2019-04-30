@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const LoginSignupForm = () => {
   const [state, setState] = useState({
@@ -14,42 +18,60 @@ const LoginSignupForm = () => {
 
   return (
     <div>
-      <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
-      <div className="flex flex-column">
-        {!login && (
-          <input
-            value={name}
-            onChange={e => setState({ ...state, name: e.target.value })}
+      <Paper elevation={1}>
+        <Typography variant="h4" component="h3">
+          {login ? 'Login' : 'Sign Up'}
+        </Typography>
+        <form className="flex flex-column">
+          {!login && <TextField label="Name" margin="normal" />}
+          <TextField
+            label="Email Address"
             type="text"
-            placeholder="Your name"
+            placeholder="Your email address"
           />
-        )}
-        <input
-          value={email}
-          onChange={e => setState({ ...state, email: e.target.value })}
-          type="text"
-          placeholder="Your email address"
-        />
-        <input
-          value={password}
-          onChange={e => setState({ ...state, password: e.target.value })}
-          type="password"
-          placeholder="Choose a safe password"
-        />
-      </div>
-      <div className="flex mt3">
-        {login ? (
-          <Login variables={{ email, password }} />
-        ) : (
-          <Signup variables={{ email, password, name }} />
-        )}
-        <div
-          className="pointer button"
-          onClick={() => setState({ ...state, login: !login })}
-        >
-          {login ? 'need to create an account?' : 'already have an account?'}
+          <TextField label="Password" type="text" placeholder="Your password" />
+          <TextField
+            label="Password Confirmation"
+            type="text"
+            placeholder="Your password"
+          />
+        </form>
+        <div className="flex mt3">
+          {login ? (
+            <Login variables={{ email, password }}>
+              {loginMutation => (
+                <Button
+                  className="pointer mr2 button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => loginMutation()}
+                >
+                  Login
+                </Button>
+              )}
+            </Login>
+          ) : (
+            <Signup variables={{ email, password, name }}>
+              {signupMutation => (
+                <Button
+                  className="pointer mr2 button"
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => signupMutation()}
+                >
+                  Signup
+                </Button>
+              )}
+            </Signup>
+          )}
+          <div
+            className="pointer button"
+            onClick={() => setState({ ...state, login: !login })}
+          >
+            {login ? 'need to create an account?' : 'already have an account?'}
+          </div>
         </div>
-      </div>
+      </Paper>
     </div>
   );
 };
