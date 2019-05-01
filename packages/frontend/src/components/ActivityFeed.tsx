@@ -1,6 +1,7 @@
 import * as React from 'react';
-import '../styles/ProjectTeaser.css';
 import ProjectList from './ProjectList';
+
+import '../scss/ProjectTeaser.scss';
 
 const ActivityFeed: React.FunctionComponent = () => (
   <div className="activity-feed">

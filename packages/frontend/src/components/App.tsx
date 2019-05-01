@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import '../styles/App.css';
 import ActivityFeed from './ActivityFeed';
 import CreateProject from './CreateProject';
 import Header from './Header';
@@ -8,12 +7,18 @@ import LoginSignupForm from './LoginSignupForm';
 import ProfilePage from './ProfilePage';
 import Modal from '@material-ui/core/Modal';
 
+import '../scss/App.scss';
+
 const App: React.FunctionComponent = () => {
   const [isLoginSignupModalOpen, setLoginSignupModalOpen] = useState(false);
   return (
     <div>
       <Header openLoginSignupModal={() => setLoginSignupModalOpen(true)} />
-      <Modal open={isLoginSignupModalOpen}>
+      <Modal
+        className="modal"
+        open={isLoginSignupModalOpen}
+        onBackdropClick={() => setLoginSignupModalOpen(false)}
+      >
         <LoginSignupForm />
       </Modal>
       <div>

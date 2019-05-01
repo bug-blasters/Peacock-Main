@@ -1,12 +1,12 @@
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
-import '../styles/App.css';
+import '../scss/App.scss';
 
 const LoginSignupForm = () => {
   const [state, setState] = useState({

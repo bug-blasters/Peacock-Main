@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { AUTH_TOKEN } from '../constants';
-import '../styles/ProjectTeaser.css';
+
+import '../scss/ProjectTeaser.scss';
 
 const FAVORITE_MUTATION = gql`
   mutation favorite($projectId: ID!) {

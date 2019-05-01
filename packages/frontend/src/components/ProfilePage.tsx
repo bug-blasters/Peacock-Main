@@ -1,13 +1,11 @@
+import { Modal } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import React, { useCallback, useState } from 'react';
 import ReactDOM from 'react-dom';
-
-import Button from '@material-ui/core/Button';
+import { useDropzone } from 'react-dropzone';
 import { Project } from '../generated/graphql';
 
-import '../styles/ProfilePage.css';
-import { Modal } from '@material-ui/core';
-
-import { useDropzone } from 'react-dropzone';
+import '../scss/ProfilePage.scss';
 
 const Ribbon = () => (
   <div className="ribbon">
