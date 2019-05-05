@@ -117,7 +117,11 @@ const ProfilePage = () => {
         >
           Upload Profile Pic
         </Button>
-        <Modal className="modal" open={isProfileUploadOpen}>
+        <Modal
+          className="modal"
+          open={isProfileUploadOpen}
+          onBackdropClick={() => setProfileUploadOpen(false)}
+        >
           <Paper className="photo-upload-card" elevation={1}>
             <PhotoUpload />
           </Paper>
