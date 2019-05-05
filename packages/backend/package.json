@@ -9,6 +9,7 @@
     "prismainit": "cd prisma && prisma init"
   },
   "dependencies": {
+    "aws-sdk": "^2.449.0",
     "bcryptjs": "2.4.3",
     "graphql-import": "0.7.1",
     "graphql-yoga": "1.17.4",

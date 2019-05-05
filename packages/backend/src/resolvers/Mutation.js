@@ -1,6 +1,9 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { APP_SECRET, getUserId } = require('../utils');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { APP_SECRET, getUserId } = require("../utils");
+const AWS = require("aws-sdk");
+
+const s3Bucket = "peacock";
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -15,11 +18,11 @@ async function signup(parent, args, context, info) {
 async function login(parent, args, context, info) {
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
-    throw new Error('No such user found');
+    throw new Error("No such user found");
   }
   const valid = await bcrypt.compare(args.password, user.password);
   if (!valid) {
-    throw new Error('Invalid password');
+    throw new Error("Invalid password");
   }
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
@@ -62,7 +65,31 @@ async function favorite(parent, args, context, info) {
   });
 }
 
+async function signS3(parent, { filename, filetype }, context, info) {
+  const s3Client = new AWS.S3({
+    signatureVersion: "v4",
+    region: "us-east-2"
+  });
+
+  const s3Params = {
+    Bucket: s3Bucket,
+    Key: filename,
+    Expires: 60,
+    ContentType: filetype,
+    ACL: "public-read"
+  };
+
+  const signedRequest = await s3Client.getSignedUrl("putObject", s3Params);
+  const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+
+  return {
+    signedRequest,
+    url
+  };
+}
+
 module.exports = {
+  signS3,
   signup,
   login,
   favorite,

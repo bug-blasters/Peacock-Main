@@ -16,6 +16,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   favorite(projectId: ID!): Favorite
+  signS3(filename: String!, filetype: String!): S3Payload!
 }
 
 type Project {
@@ -29,6 +30,11 @@ type Project {
 type AuthPayload {
   token: String
   user: User
+}
+
+type S3Payload {
+  signedRequest: String!
+  url: String!
 }
 
 type User {
