@@ -138,6 +138,25 @@ export type ProjectListQuery = { __typename?: 'Query' } & {
     };
 };
 
+export type FavoriteGqlMutationVariables = {
+  projectId: Scalars['ID'];
+};
+
+export type FavoriteGqlMutation = { __typename?: 'Mutation' } & {
+  favorite: Maybe<
+    { __typename?: 'Favorite' } & Pick<Favorite, 'id'> & {
+        project: { __typename?: 'Project' } & {
+          favorites: Array<
+            { __typename?: 'Favorite' } & Pick<Favorite, 'id'> & {
+                user: { __typename?: 'User' } & Pick<User, 'id'>;
+              }
+          >;
+        };
+        user: { __typename?: 'User' } & Pick<User, 'id'>;
+      }
+  >;
+};
+
 export type SignupGqlMutationVariables = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -308,6 +327,66 @@ export function withProjectList<TProps, TChildProps = {}>(
     ProjectListQueryVariables,
     ProjectListProps<TChildProps>
   >(ProjectListDocument, operationOptions);
+}
+export const FavoriteGqlDocument = gql`
+  mutation FavoriteGql($projectId: ID!) {
+    favorite(projectId: $projectId) {
+      id
+      project {
+        favorites {
+          id
+          user {
+            id
+          }
+        }
+      }
+      user {
+        id
+      }
+    }
+  }
+`;
+
+export const FavoriteGqlComponent = (
+  props: Omit<
+    Omit<
+      ReactApollo.MutationProps<
+        FavoriteGqlMutation,
+        FavoriteGqlMutationVariables
+      >,
+      'mutation'
+    >,
+    'variables'
+  > & { variables: FavoriteGqlMutationVariables }
+) => (
+  <ReactApollo.Mutation<FavoriteGqlMutation, FavoriteGqlMutationVariables>
+    mutation={FavoriteGqlDocument}
+    {...props}
+  />
+);
+
+export type FavoriteGqlProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<FavoriteGqlMutation, FavoriteGqlMutationVariables>
+> &
+  TChildProps;
+export type FavoriteGqlMutationFn = ReactApollo.MutationFn<
+  FavoriteGqlMutation,
+  FavoriteGqlMutationVariables
+>;
+export function withFavoriteGql<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    FavoriteGqlMutation,
+    FavoriteGqlMutationVariables,
+    FavoriteGqlProps<TChildProps>
+  >
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    FavoriteGqlMutation,
+    FavoriteGqlMutationVariables,
+    FavoriteGqlProps<TChildProps>
+  >(FavoriteGqlDocument, operationOptions);
 }
 export const SignupGqlDocument = gql`
   mutation SignupGql($email: String!, $password: String!, $name: String!) {

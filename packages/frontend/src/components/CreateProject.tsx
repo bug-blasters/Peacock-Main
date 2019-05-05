@@ -1,3 +1,5 @@
+import { DataProxy } from 'apollo-cache';
+import { FetchResult } from 'apollo-link';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
@@ -8,8 +10,6 @@ import {
   ProjectListQuery,
 } from '../generated/graphql';
 import { FEED_QUERY } from './ProjectList';
-import { DataProxy } from 'apollo-cache';
-import { FetchResult } from 'apollo-link';
 
 const CreateProject = (props: RouteComponentProps) => {
   const [state, setState] = useState({
@@ -52,11 +52,11 @@ const CreateProject = (props: RouteComponentProps) => {
 
 const updateStore = (
   store: DataProxy,
-  data: FetchResult<CreateProjectGqlMutation>
+  { data }: FetchResult<CreateProjectGqlMutation>
 ) => {
   const newData = store.readQuery<ProjectListQuery>({ query: FEED_QUERY });
-  if (newData && data && data.data) {
-    newData.feed.projects.push(data.data.createProject);
+  if (newData && data) {
+    newData.feed.projects.push(data.createProject);
     store.writeQuery({
       data,
       query: FEED_QUERY,
