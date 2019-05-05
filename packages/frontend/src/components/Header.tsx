@@ -23,6 +23,10 @@ const Header = ({ openLoginSignupModal }: Props) => {
         <Link to="/create" className="ml1 no-underline black">
           submit
         </Link>
+        <div className="ml1">|</div>
+        <Link to="/profile" className="ml1 no-underline black">
+          profile
+        </Link>
       </div>
     </div>
   );

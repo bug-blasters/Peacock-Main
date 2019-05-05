@@ -28,6 +28,7 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
+    // tslint:disable-next-line:no-console
     graphQLErrors.map(({ message }) => console.log(message));
   }
 });
