@@ -4,13 +4,12 @@ import React, { useState } from 'react';
 import { FetchResult } from 'react-apollo';
 import { AUTH_TOKEN } from '../constants';
 import {
-  Favorite,
   FavoriteGqlComponent,
   FavoriteGqlMutation,
   FavoriteGqlMutationFn,
   Project,
 } from '../generated/graphql';
-import '../styles/ProjectTeaser.css';
+import '../scss/ProjectTeaser.scss';
 
 type UpdateFavorteCallback = (
   store: DataProxy,
