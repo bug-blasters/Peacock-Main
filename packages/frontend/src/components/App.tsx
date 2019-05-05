@@ -1,3 +1,4 @@
+import Modal from '@material-ui/core/Modal';
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ActivityFeed from './ActivityFeed';
@@ -5,7 +6,6 @@ import CreateProject from './CreateProject';
 import Header from './Header';
 import LoginSignupForm from './LoginSignupForm';
 import ProfilePage from './ProfilePage';
-import Modal from '@material-ui/core/Modal';
 
 import '../scss/App.scss';
 

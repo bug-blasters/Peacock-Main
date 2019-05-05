@@ -9,7 +9,18 @@
   align-items: center;
 
   .login-signup-modal {
+    padding: 30px;
     height: 500px;
     width: 400px;
   }
+}
+
+.photo-upload-dropzone {
+  height: 100%;
+  width: 100%;
+}
+
+.photo-upload-card {
+  height: 500px;
+  width: 400px;
 }
