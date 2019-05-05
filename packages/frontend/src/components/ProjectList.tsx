@@ -1,6 +1,12 @@
+import { DataProxy } from 'apollo-cache';
 import gql from 'graphql-tag';
 import * as React from 'react';
-import { Favorite, Project, ProjectListComponent } from '../generated/graphql';
+import {
+  FavoriteGqlMutation,
+  Project,
+  ProjectListComponent,
+  ProjectListQuery,
+} from '../generated/graphql';
 import ProjectTeaser from './ProjectTeaser';
 
 const ProjectList: React.FunctionComponent = () => (
@@ -19,7 +25,7 @@ const ProjectList: React.FunctionComponent = () => (
           <ProjectTeaser
             project={project}
             updateStoreAfterFavorite={updateCacheAfterFavorite}
-            favorites={project.favorites}
+            numOfFavorites={project.favorites.length}
           />
         ));
       }
@@ -28,18 +34,22 @@ const ProjectList: React.FunctionComponent = () => (
 );
 
 const updateCacheAfterFavorite = (
-  store: any,
-  createFavorite: Favorite,
+  store: DataProxy,
+  favoriteMutationResult: FavoriteGqlMutation,
   projectId: Project['id']
 ) => {
-  const data = store.readQuery({ query: FEED_QUERY });
+  const data = store.readQuery<ProjectListQuery>({ query: FEED_QUERY });
+  if (data) {
+    const favoritedProject = data.feed.projects.find(
+      project => project.id === projectId
+    );
+    if (favoritedProject && favoriteMutationResult.favorite) {
+      favoritedProject.favorites =
+        favoriteMutationResult.favorite.project.favorites;
+    }
 
-  const favoritedProject = data.feed.projects.find(
-    (project: Project) => project.id === projectId
-  );
-  favoritedProject.favorites = createFavorite.project.favorites;
-
-  store.writeQuery({ query: FEED_QUERY, data });
+    store.writeQuery({ query: FEED_QUERY, data });
+  }
 };
 
 export const FEED_QUERY = gql`
