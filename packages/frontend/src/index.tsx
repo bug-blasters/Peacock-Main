@@ -10,7 +10,7 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import { AUTH_TOKEN } from './constants';
-import './styles/index.css';
+import './scss/index.scss';
 // import {BrowserRouter as Router} from 'react-router-dom';
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',

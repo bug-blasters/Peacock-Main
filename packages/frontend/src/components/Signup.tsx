@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import React from 'react';
 import { AUTH_TOKEN } from '../constants';
 import {
   SignupGqlComponent,
@@ -9,15 +10,12 @@ import {
 
 interface SignupProps {
   variables: SignupGqlMutationVariables;
+  children(mutation: SignupGqlMutationFn): JSX.Element;
 }
 
-const Signup = ({ variables }: SignupProps) => (
+const Signup = ({ variables, children }: SignupProps) => (
   <SignupGqlComponent variables={variables} onCompleted={saveUserData}>
-    {(mutation: SignupGqlMutationFn) => (
-      <div className="pointer mr2 button" onClick={() => mutation()}>
-        create account
-      </div>
-    )}
+    {(mutation: SignupGqlMutationFn) => children(mutation)}
   </SignupGqlComponent>
 );
 

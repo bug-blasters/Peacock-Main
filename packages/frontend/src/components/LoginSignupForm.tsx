@@ -1,6 +1,12 @@
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
+
+import '../scss/App.scss';
 
 const LoginSignupForm = () => {
   const [state, setState] = useState({
@@ -13,44 +19,59 @@ const LoginSignupForm = () => {
   const { login, email, password, name } = state;
 
   return (
-    <div>
-      <h4 className="mv3">{login ? 'Login' : 'Sign Up'}</h4>
-      <div className="flex flex-column">
-        {!login && (
-          <input
-            value={name}
-            onChange={e => setState({ ...state, name: e.target.value })}
-            type="text"
-            placeholder="Your name"
-          />
-        )}
-        <input
-          value={email}
-          onChange={e => setState({ ...state, email: e.target.value })}
+    <Paper className="login-signup-modal" elevation={1}>
+      <Typography variant="h4" component="h3">
+        {login ? 'Login' : 'Sign Up'}
+      </Typography>
+      <form className="flex flex-column">
+        {!login && <TextField label="Name" margin="normal" />}
+        <TextField
+          label="Email Address"
           type="text"
           placeholder="Your email address"
         />
-        <input
-          value={password}
-          onChange={e => setState({ ...state, password: e.target.value })}
-          type="password"
-          placeholder="Choose a safe password"
+        <TextField label="Password" type="text" placeholder="Your password" />
+        <TextField
+          label="Password Confirmation"
+          type="text"
+          placeholder="Your password"
         />
-      </div>
+      </form>
       <div className="flex mt3">
         {login ? (
-          <Login variables={{ email, password }} />
+          <Login variables={{ email, password }}>
+            {loginMutation => (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => loginMutation()}
+              >
+                Login
+              </Button>
+            )}
+          </Login>
         ) : (
-          <Signup variables={{ email, password, name }} />
+          <Signup variables={{ email, password, name }}>
+            {signupMutation => (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => signupMutation()}
+              >
+                Signup
+              </Button>
+            )}
+          </Signup>
         )}
-        <div
-          className="pointer button"
+        <Button
+          color="secondary"
+          variant="outlined"
           onClick={() => setState({ ...state, login: !login })}
         >
           {login ? 'need to create an account?' : 'already have an account?'}
-        </div>
+        </Button>
       </div>
-    </div>
+    </Paper>
   );
 };
 

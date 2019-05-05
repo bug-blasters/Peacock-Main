@@ -1,17 +1,24 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface Props extends RouteComponentProps {
+  openLoginSignupModal(): void;
+}
+
+const Header = ({ openLoginSignupModal }: Props) => {
   return (
     <div className="flex pa1 justify-between nowrap orange">
       <div className="flex flex-fixed black">
         <Link to="/" className="fw7 mr1 no-underline black">
           Hacker News
         </Link>
-        <Link to="/login" className="ml1 no-underline black">
+        <div
+          onClick={openLoginSignupModal}
+          className="ml1 no-underline black pointer"
+        >
           new
-        </Link>
+        </div>
         <div className="ml1">|</div>
         <Link to="/create" className="ml1 no-underline black">
           submit

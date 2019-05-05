@@ -1,0 +1,86 @@
+.Profile {
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+.cover-photo {
+  background-color: grey;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 100vw;
+  height: 300px;
+}
+
+.profile-card {
+  background-color: brown;
+  position: absolute;
+  height: 400px;
+  width: 200px;
+  top: 100px;
+  left: 30px;
+}
+
+.profile-image > img {
+  margin-top: 25px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.project-container {
+  background-color: cyan;
+  position: absolute;
+  margin: auto;
+  top: 100px;
+  left: 230px;
+  right: 0;
+  width: 500px;
+  padding: 10px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 6px solid brown;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  position: absolute;
+  bottom: 0;
+}
+
+.ribbon-container {
+  position: absolute;
+  display: flex;
+  margin: 0px 10px;
+}
+
+.ribbon {
+  display: inline-block;
+  height: 30px;
+  width: 8px;
+  margin-right: 6px;
+  background-color: yellow;
+  position: relative;
+}
+
+.featured-project {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+.other-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.other-content > * {
+  padding: 5px;
+  width: calc(50% - 10px);
+}

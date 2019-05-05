@@ -10,15 +10,12 @@ import {
 
 interface LoginProps {
   variables: LoginGqlMutationVariables;
+  children(mutation: LoginGqlMutationFn): JSX.Element;
 }
 
-const Login = ({ variables }: LoginProps) => (
+const Login = ({ variables, children }: LoginProps) => (
   <LoginGqlComponent variables={variables} onCompleted={saveUserData}>
-    {(mutation: LoginGqlMutationFn) => (
-      <div className="pointer mr2 button" onClick={() => mutation()}>
-        login
-      </div>
-    )}
+    {(mutation: LoginGqlMutationFn) => children(mutation)}
   </LoginGqlComponent>
 );
 
