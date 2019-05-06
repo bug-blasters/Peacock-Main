@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { GraphQLServer } = require('graphql-yoga');
 const { prisma } = require('./__generated__/prisma-client');
 const Query = require('./resolvers/Query');
@@ -13,7 +15,7 @@ const resolvers = {
   Subscription,
   User,
   Favorite,
-  Project
+  Project,
 };
 
 const server = new GraphQLServer({
@@ -21,8 +23,8 @@ const server = new GraphQLServer({
   resolvers,
   context: request => ({
     ...request,
-    prisma
-  })
+    prisma,
+  }),
 });
 
 server.start(() => console.log(`Server is running on http://localhost:4000`));

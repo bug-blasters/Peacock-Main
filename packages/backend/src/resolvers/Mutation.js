@@ -1,9 +1,9 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { APP_SECRET, getUserId } = require("../utils");
-const AWS = require("aws-sdk");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { APP_SECRET, getUserId } = require('../utils');
+const AWS = require('aws-sdk');
 
-const s3Bucket = "peacock";
+const s3Bucket = 'peacock';
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -11,23 +11,23 @@ async function signup(parent, args, context, info) {
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user
+    user,
   };
 }
 
 async function login(parent, args, context, info) {
   const user = await context.prisma.user({ email: args.email });
   if (!user) {
-    throw new Error("No such user found");
+    throw new Error('No such user found');
   }
   const valid = await bcrypt.compare(args.password, user.password);
   if (!valid) {
-    throw new Error("Invalid password");
+    throw new Error('Invalid password');
   }
   const token = jwt.sign({ userId: user.id }, APP_SECRET);
   return {
     token,
-    user
+    user,
   };
 }
 
@@ -36,14 +36,14 @@ function createProject(parent, args, context, info) {
   return context.prisma.createProject({
     title: args.title,
     description: args.description,
-    ownedBy: { connect: { id: userId } }
+    ownedBy: { connect: { id: userId } },
   });
 }
 
 function deleteProject(parent, args, context, info) {
   const userId = getUserId(context);
   return context.prisma.deleteProject({
-    id: args.id
+    id: args.id,
   });
 }
 
@@ -52,7 +52,7 @@ async function favorite(parent, args, context, info) {
 
   const projectExists = await context.prisma.$exists.favorite({
     user: { id: userId },
-    project: { id: args.projectId }
+    project: { id: args.projectId },
   });
 
   if (projectExists) {
@@ -61,14 +61,14 @@ async function favorite(parent, args, context, info) {
 
   return context.prisma.createFavorite({
     user: { connect: { id: userId } },
-    project: { connect: { id: args.projectId } }
+    project: { connect: { id: args.projectId } },
   });
 }
 
 async function signS3(parent, { filename, filetype }, context, info) {
   const s3Client = new AWS.S3({
-    signatureVersion: "v4",
-    region: "us-east-2"
+    signatureVersion: 'v4',
+    region: 'us-east-2',
   });
 
   const s3Params = {
@@ -76,15 +76,15 @@ async function signS3(parent, { filename, filetype }, context, info) {
     Key: filename,
     Expires: 60,
     ContentType: filetype,
-    ACL: "public-read"
+    ACL: 'bucket-owner-full-control',
   };
 
-  const signedRequest = await s3Client.getSignedUrl("putObject", s3Params);
+  const signedRequest = await s3Client.getSignedUrl('putObject', s3Params);
   const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
 
   return {
     signedRequest,
-    url
+    url,
   };
 }
 
@@ -94,5 +94,5 @@ module.exports = {
   login,
   favorite,
   createProject,
-  deleteProject
+  deleteProject,
 };
