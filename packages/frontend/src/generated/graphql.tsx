@@ -30,6 +30,7 @@ export type Mutation = {
   signup?: Maybe<AuthPayload>;
   login?: Maybe<AuthPayload>;
   favorite?: Maybe<Favorite>;
+  signS3: S3Payload;
 };
 
 export type MutationCreateProjectArgs = {
@@ -54,6 +55,11 @@ export type MutationLoginArgs = {
 
 export type MutationFavoriteArgs = {
   projectId: Scalars['ID'];
+};
+
+export type MutationSignS3Args = {
+  filename: Scalars['String'];
+  filetype: Scalars['String'];
 };
 
 export type Project = {
@@ -85,6 +91,11 @@ export type QueryFeedArgs = {
   skip?: Maybe<Scalars['Int']>;
   first?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<ProjectOrderByInput>;
+};
+
+export type S3Payload = {
+  signedRequest: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type Subscription = {
@@ -119,6 +130,18 @@ export type LoginGqlMutationVariables = {
 
 export type LoginGqlMutation = { __typename?: 'Mutation' } & {
   login: Maybe<{ __typename?: 'AuthPayload' } & Pick<AuthPayload, 'token'>>;
+};
+
+export type SignS3GqlMutationVariables = {
+  filename: Scalars['String'];
+  filetype: Scalars['String'];
+};
+
+export type SignS3GqlMutation = { __typename?: 'Mutation' } & {
+  signS3: { __typename?: 'S3Payload' } & Pick<
+    S3Payload,
+    'url' | 'signedRequest'
+  >;
 };
 
 export type ProjectListQueryVariables = {};
@@ -277,6 +300,53 @@ export function withLoginGql<TProps, TChildProps = {}>(
     LoginGqlMutationVariables,
     LoginGqlProps<TChildProps>
   >(LoginGqlDocument, operationOptions);
+}
+export const SignS3GqlDocument = gql`
+  mutation SignS3Gql($filename: String!, $filetype: String!) {
+    signS3(filename: $filename, filetype: $filetype) {
+      url
+      signedRequest
+    }
+  }
+`;
+
+export const SignS3GqlComponent = (
+  props: Omit<
+    Omit<
+      ReactApollo.MutationProps<SignS3GqlMutation, SignS3GqlMutationVariables>,
+      'mutation'
+    >,
+    'variables'
+  > & { variables: SignS3GqlMutationVariables }
+) => (
+  <ReactApollo.Mutation<SignS3GqlMutation, SignS3GqlMutationVariables>
+    mutation={SignS3GqlDocument}
+    {...props}
+  />
+);
+
+export type SignS3GqlProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<SignS3GqlMutation, SignS3GqlMutationVariables>
+> &
+  TChildProps;
+export type SignS3GqlMutationFn = ReactApollo.MutationFn<
+  SignS3GqlMutation,
+  SignS3GqlMutationVariables
+>;
+export function withSignS3Gql<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    SignS3GqlMutation,
+    SignS3GqlMutationVariables,
+    SignS3GqlProps<TChildProps>
+  >
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    SignS3GqlMutation,
+    SignS3GqlMutationVariables,
+    SignS3GqlProps<TChildProps>
+  >(SignS3GqlDocument, operationOptions);
 }
 export const ProjectListDocument = gql`
   query ProjectList {

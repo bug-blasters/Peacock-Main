@@ -18,9 +18,12 @@
 .photo-upload-dropzone {
   height: 100%;
   width: 100%;
+  flex: 1;
 }
 
 .photo-upload-card {
   height: 500px;
   width: 400px;
+  display: flex;
+  flex-direction: column;
 }
