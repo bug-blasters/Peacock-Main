@@ -43,7 +43,7 @@ const OtherProjects = ({ projects }: OtherProjectsProps) => (
 );
 
 const ProfilePage = () => {
-  const [isProfileUploadOpen, setProfileUploadOpen] = useState(false);
+  const [isProfileUploadOpen, openProfileUpload] = useState(false);
   const [profilePictureUrl, setProfilePictureUrl] = useState(
     'https://i.imgur.com/aBQQMc6.png'
   );
@@ -58,11 +58,15 @@ const ProfilePage = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => setProfileUploadOpen(true)}
+          onClick={() => openProfileUpload(true)}
         >
           Upload Profile Pic
         </Button>
-        <Modal className="modal" open={isProfileUploadOpen}>
+        <Modal
+          className="modal"
+          open={isProfileUploadOpen}
+          onBackdropClick={() => openProfileUpload(false)}
+        >
           <Mutation mutation={SignS3GqlDocument}>
             {(signS3Mutation: SignS3GqlMutationFn) => (
               <PhotoUpload
