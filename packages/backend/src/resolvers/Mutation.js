@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { APP_SECRET, getUserId } = require('../utils');
 const {
-  basePath,
+  baseUrl,
   s3Bucket,
   profilePicturePathForId,
 } = require('./PathToUserAssets');
@@ -85,7 +85,7 @@ async function signS3(parent, { filename, filetype }, context, info) {
   };
 
   const signedRequest = await s3Client.getSignedUrl('putObject', s3Params);
-  const url = basePath + profilePicturePath;
+  const url = baseUrl + profilePicturePath;
 
   return {
     signedRequest,
