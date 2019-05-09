@@ -44,13 +44,16 @@ const OtherProjects = ({ projects }: OtherProjectsProps) => (
 
 const ProfilePage = () => {
   const [isProfileUploadOpen, setProfileUploadOpen] = useState(false);
+  const [profilePictureUrl, setProfilePictureUrl] = useState(
+    'https://i.imgur.com/aBQQMc6.png'
+  );
   return (
     <div className="Profile">
       <div className="cover-photo" />
       <div className="profile-card">
         <Ribbons />
         <div className="profile-image">
-          <img src="https://i.imgur.com/aBQQMc6.png" />
+          <img src={profilePictureUrl} />
         </div>
         <Button
           variant="contained"
@@ -62,7 +65,10 @@ const ProfilePage = () => {
         <Modal className="modal" open={isProfileUploadOpen}>
           <Mutation mutation={SignS3GqlDocument}>
             {(signS3Mutation: SignS3GqlMutationFn) => (
-              <PhotoUpload signS3={signS3Mutation} />
+              <PhotoUpload
+                signS3={signS3Mutation}
+                setProfilePictureUrl={setProfilePictureUrl}
+              />
             )}
           </Mutation>
         </Modal>

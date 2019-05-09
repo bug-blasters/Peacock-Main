@@ -27,9 +27,10 @@ const formatFilename = (filename: any) => {
 
 interface PhotoUploadProps {
   signS3: SignS3GqlMutationFn;
+  setProfilePictureUrl: (url: string) => void;
 }
 
-const PhotoUpload = ({ signS3 }: PhotoUploadProps) => {
+const PhotoUpload = ({ signS3, setProfilePictureUrl }: PhotoUploadProps) => {
   const [file, setFile] = useState<any | null>(null);
   const onDrop = useCallback(acceptedFiles => setFile(acceptedFiles[0]), []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -48,6 +49,7 @@ const PhotoUpload = ({ signS3 }: PhotoUploadProps) => {
     if (response && response.data) {
       const { signedRequest, url } = response.data.signS3;
       await uploadToS3(file, signedRequest);
+      setProfilePictureUrl(url);
     }
   };
 

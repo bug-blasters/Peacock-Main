@@ -7,21 +7,16 @@ const generateHashFromId = s =>
       return a & a;
     }, 0);
 
-// export const formatFilename = filename => {
-//   const date = moment().format('YYYYMMDD');
-//   const randomString = Math.random()
-//     .toString(36)
-//     .substring(2, 7);
-//   const cleanFileName = filename.toLowerCase().replace(/[^a-z0-9]/g, '-');
-//   const newFilename = `images/${date}-${randomString}-${cleanFileName}`;
-//   return newFilename.substring(0, 60);
-// };
+const s3Bucket = 'peacock';
+const baseUrl = `https://${s3Bucket}.s3.amazonaws.com/`;
 
-const profilePictureUrlForId = userId => {
+const profilePicturePathForId = userId => {
   const hash = Math.abs(generateHashFromId(userId));
   return `images/profile-pictures/${hash}-${userId}`;
 };
 
 module.exports = {
-  profilePictureUrlForId,
+  profilePicturePathForId,
+  baseUrl,
+  s3Bucket,
 };

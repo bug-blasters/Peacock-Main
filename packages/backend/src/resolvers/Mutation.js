@@ -1,9 +1,12 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { APP_SECRET, getUserId } = require('../utils');
+const {
+  basePath,
+  s3Bucket,
+  profilePicturePathForId,
+} = require('./PathToUserAssets');
 const AWS = require('aws-sdk');
-
-const s3Bucket = 'peacock';
 
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10);
@@ -71,16 +74,18 @@ async function signS3(parent, { filename, filetype }, context, info) {
     region: 'us-east-2',
   });
 
+  const profilePicturePath = profilePicturePathForId(getUserId(context));
+
   const s3Params = {
     Bucket: s3Bucket,
-    Key: filename,
+    Key: profilePicturePath,
     Expires: 60,
     ContentType: filetype,
     ACL: 'bucket-owner-full-control',
   };
 
   const signedRequest = await s3Client.getSignedUrl('putObject', s3Params);
-  const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+  const url = basePath + profilePicturePath;
 
   return {
     signedRequest,
