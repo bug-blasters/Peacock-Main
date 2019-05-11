@@ -18,19 +18,35 @@ const LoginSignupForm = () => {
 
   const { login, email, password, name } = state;
 
+  const handleChange = (stateAttr: string) => (event: any) => {
+    setState({ ...state, [stateAttr]: event.target.value });
+  };
+
   return (
     <Paper className="login-signup-modal" elevation={1}>
       <Typography variant="h4" component="h3">
         {login ? 'Login' : 'Sign Up'}
       </Typography>
       <form className="flex flex-column">
-        {!login && <TextField label="Name" margin="normal" />}
+        {!login && (
+          <TextField
+            onChange={handleChange('name')}
+            label="Name"
+            margin="normal"
+          />
+        )}
         <TextField
+          onChange={handleChange('email')}
           label="Email Address"
           type="text"
           placeholder="Your email address"
         />
-        <TextField label="Password" type="text" placeholder="Your password" />
+        <TextField
+          onChange={handleChange('password')}
+          label="Password"
+          type="text"
+          placeholder="Your password"
+        />
         <TextField
           label="Password Confirmation"
           type="text"
