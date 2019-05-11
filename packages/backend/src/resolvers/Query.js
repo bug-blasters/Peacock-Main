@@ -38,11 +38,12 @@ function projects(parent, args, context, info) {
 // TODO: only send provide necessary data
 function currentUser(parent, args, context, info) {
   const userId = getUserId(context);
-  return context.prisma.users({ id: userId });
+  return context.prisma.user({ id: userId });
 }
 
 module.exports = {
   feed,
   users,
   projects,
+  currentUser,
 };

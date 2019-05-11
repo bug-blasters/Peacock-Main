@@ -84,6 +84,7 @@ export type Query = {
   feed: Feed;
   users: Array<User>;
   projects: Array<Project>;
+  currentUser: User;
 };
 
 export type QueryFeedArgs = {
@@ -110,6 +111,7 @@ export type User = {
   password: Scalars['String'];
   projects: Array<Project>;
   favorites: Array<Favorite>;
+  profilePictureUrl: Scalars['String'];
 };
 export type CreateProjectGqlMutationVariables = {
   title: Scalars['String'];
@@ -130,6 +132,12 @@ export type LoginGqlMutationVariables = {
 
 export type LoginGqlMutation = { __typename?: 'Mutation' } & {
   login: Maybe<{ __typename?: 'AuthPayload' } & Pick<AuthPayload, 'token'>>;
+};
+
+export type CurrentUserQueryVariables = {};
+
+export type CurrentUserQuery = { __typename?: 'Query' } & {
+  currentUser: { __typename?: 'User' } & Pick<User, 'profilePictureUrl'>;
 };
 
 export type SignS3GqlMutationVariables = {
@@ -300,6 +308,48 @@ export function withLoginGql<TProps, TChildProps = {}>(
     LoginGqlMutationVariables,
     LoginGqlProps<TChildProps>
   >(LoginGqlDocument, operationOptions);
+}
+export const CurrentUserDocument = gql`
+  query CurrentUser {
+    currentUser {
+      profilePictureUrl
+    }
+  }
+`;
+
+export const CurrentUserComponent = (
+  props: Omit<
+    Omit<
+      ReactApollo.QueryProps<CurrentUserQuery, CurrentUserQueryVariables>,
+      'query'
+    >,
+    'variables'
+  > & { variables?: CurrentUserQueryVariables }
+) => (
+  <ReactApollo.Query<CurrentUserQuery, CurrentUserQueryVariables>
+    query={CurrentUserDocument}
+    {...props}
+  />
+);
+
+export type CurrentUserProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<CurrentUserQuery, CurrentUserQueryVariables>
+> &
+  TChildProps;
+export function withCurrentUser<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    CurrentUserQuery,
+    CurrentUserQueryVariables,
+    CurrentUserProps<TChildProps>
+  >
+) {
+  return ReactApollo.withQuery<
+    TProps,
+    CurrentUserQuery,
+    CurrentUserQueryVariables,
+    CurrentUserProps<TChildProps>
+  >(CurrentUserDocument, operationOptions);
 }
 export const SignS3GqlDocument = gql`
   mutation SignS3Gql($filename: String!, $filetype: String!) {

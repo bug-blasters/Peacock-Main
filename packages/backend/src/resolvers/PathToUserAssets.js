@@ -10,13 +10,13 @@ const generateHashFromId = s =>
 const s3Bucket = 'peacock';
 const baseUrl = `https://${s3Bucket}.s3.amazonaws.com/`;
 
-const profilePicturePathForId = userId => {
+const profilePictureUrlForId = userId => {
   const hash = Math.abs(generateHashFromId(userId));
-  return `images/profile-pictures/${hash}-${userId}`;
+  return `${baseUrl}images/profile-pictures/${hash}-${userId}`;
 };
 
 module.exports = {
-  profilePicturePathForId,
+  profilePictureUrlForId,
   baseUrl,
   s3Bucket,
 };

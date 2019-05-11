@@ -17,6 +17,13 @@ and about our project structure [here](https://medium.com/trabe/monorepo-setup-w
 ### frontend
 - This directory contains our core frontend react service
 - to use: `yarn install` then `yarn start`
+- when graphql typescript code generator errors out with the following, you've forgotten to update your backend schema resolvers somewhere
+```
+AggregateError: 
+        GraphQLDocumentError: Cannot query field "currentUser" on type "Query".
+                    at src/components/ProfilePage.tsx:2:3
+
+```
 
 ### backend
 - This directory contains our graphql api service
